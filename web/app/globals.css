@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #f1f5f9;
+  --bg-surface: #ffffff;
+  --bg-glass: #ffffff;
+  --border-color: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --accent-emerald: #0ca678;
+  --accent-emerald-hover: #0b946b;
+  --accent-emerald-bg: #e6fcf5;
+  --accent-emerald-border: #c3fae8;
+  --accent-indigo: #7048e8;
+  --accent-indigo-hover: #5f3dc4;
+  --accent-indigo-bg: #f3f0ff;
+  --accent-indigo-border: #d0bfff;
+  --accent-sky: #1c7ed6;
+  --accent-sky-hover: #1864ab;
+  --accent-sky-bg: #e7f5ff;
+  --accent-sky-border: #a5d8ff;
+  --accent-rose: #e03131;
+  --accent-rose-hover: #c92a2a;
+  --accent-rose-bg: #fff5f5;
+  --accent-rose-border: #ffc9c9;
+  --accent-amber: #f08c00;
+  --accent-amber-bg: #fff9db;
+  --accent-amber-border: #ffe066;
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.02),
+    0 8px 16px rgba(0, 0, 0, 0.03),
+    0 16px 24px rgba(0, 0, 0, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Glassmorphism Card as 3D stacked tiles */
+.glass-card, .card {
+  background: var(--bg-glass) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow) !important;
+  padding: 24px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+}
+
+.glass-card:hover, .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.02),
+    0 12px 24px rgba(0, 0, 0, 0.03),
+    0 24px 38px rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-emerald {
+  background: var(--accent-emerald);
+  color: #ffffff;
+}
+.btn-emerald:hover {
+  background: var(--accent-emerald-hover);
+  transform: translateY(-1px);
+}
+
+.btn-indigo {
+  background: var(--accent-indigo);
+  color: #ffffff;
+}
+.btn-indigo:hover {
+  background: var(--accent-indigo-hover);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-danger {
+  background: var(--accent-rose-bg);
+  color: var(--accent-rose);
+  border: 1px solid var(--accent-rose-border);
+}
+.btn-danger:hover {
+  background: var(--accent-rose);
+  color: #ffffff;
+}
+
+/* Form inputs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-input, .form-select {
+  width: 100%;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus, .form-select:focus {
+  border-color: var(--accent-indigo);
+}
+
+/* Table styling */
+.custom-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.custom-table th {
+  background: #f8fafc;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.custom-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.custom-table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.01);
+}
+
+/* Status Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge-sholat {
+  background: #e6fcf5;
+  color: var(--accent-emerald);
+  border: 1px solid #c3fae8;
+}
+
+.badge-tidak {
+  background: #fff5f5;
+  color: var(--accent-rose);
+  border: 1px solid #ffc9c9;
+}
+
+.badge-role {
+  background: #f3f0ff;
+  color: var(--accent-indigo);
+  border: 1px solid #d0bfff;
+}
+
+/* Print Stylesheet for Rekap Presensi */
+@media print {
+  @page {
+    size: landscape;
+    margin: 15mm;
+  }
+  body {
+    background-color: #fff !important;
+    color: #000 !important;
+  }
+  .sidebar-nav, .header-bar, .no-print {
+    display: none !important;
+  }
+  .glass-card {
+    background: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #000 !important;
+    padding: 0 !important;
+  }
+  .custom-table th, .custom-table td {
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+  }
+}

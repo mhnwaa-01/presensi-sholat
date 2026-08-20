@@ -1,0 +1,181 @@
+:root {
+  --bg-app: #f1f5f9;
+  --bg-card: #ffffff;
+  --border-card: #e2e8f0;
+  
+  --accent-pastel-green: #0ca678;
+  --accent-pastel-green-bg: #e6fcf5;
+  --accent-pastel-green-border: #c3fae8;
+
+  --accent-pastel-blue: #1c7ed6;
+  --accent-pastel-blue-bg: #e7f5ff;
+  --accent-pastel-blue-border: #a5d8ff;
+
+  --accent-pastel-yellow: #f08c00;
+  --accent-pastel-yellow-bg: #fff9db;
+  --accent-pastel-yellow-border: #ffe066;
+
+  --accent-pastel-rose: #e03131;
+  --accent-pastel-rose-bg: #fff5f5;
+  --accent-pastel-rose-border: #ffc9c9;
+
+  --accent-pastel-purple: #7048e8;
+  --accent-pastel-purple-bg: #f3f0ff;
+  --accent-pastel-purple-border: #d0bfff;
+
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --bottom-nav-height: 68px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #cbd5e1;
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  width: 100%;
+  max-width: 480px; /* Mobile frame max width */
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid var(--border-card);
+  border-right: 1px solid var(--border-card);
+}
+
+.mobile-container {
+  flex: 1;
+  padding: 20px 18px 90px;
+  overflow-y: auto;
+}
+
+/* Card Component with Stacked 3D Shadow */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.02),
+    0 8px 16px rgba(0, 0, 0, 0.03),
+    0 16px 24px rgba(0, 0, 0, 0.04);
+  margin-bottom: 18px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    0 12px 24px rgba(0, 0, 0, 0.05),
+    0 24px 36px rgba(0, 0, 0, 0.06);
+}
+
+/* Header */
+.app-header {
+  padding: 18px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  height: var(--bottom-nav-height);
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.nav-item.active {
+  color: var(--accent-pastel-green);
+}
+
+.nav-item.active svg {
+  stroke: var(--accent-pastel-green);
+  filter: drop-shadow(0 2px 4px rgba(12, 166, 120, 0.15));
+}
+
+/* Mobile Toggle Switch */
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-card);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.toggle-sholat {
+  background: var(--accent-pastel-green-bg);
+  color: var(--accent-pastel-green);
+  border-color: var(--accent-pastel-green-border);
+}
+
+.toggle-tidak {
+  background: var(--accent-pastel-rose-bg);
+  color: var(--accent-pastel-rose);
+  border-color: var(--accent-pastel-rose-border);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}

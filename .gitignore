@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+/web/node_modules/
+/mobile/node_modules/
+
+# Production build outputs
+.next/
+/web/.next/
+dist/
+/mobile/dist/
+build/
+
+# Local env files (credentials)
+.env
+.env.local
+.env.*.local
+*.env
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Zip files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# OS metadata files
+.DS_Store
+Thumbs.db
+Icon?
+Icon\r
