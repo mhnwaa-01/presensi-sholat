@@ -10,7 +10,9 @@ import {
   Printer,
   CheckCircle,
   XCircle,
-  Award
+  Award,
+  FileSpreadsheet,
+  PieChart
 } from 'lucide-react';
 
 export default function WaliKelasPage() {
@@ -137,6 +139,10 @@ export default function WaliKelasPage() {
 
   // Stats calculation
   const totalStudents = students.length;
+  const totalRecords = attendance.length;
+  const totalSholat = attendance.filter(a => a.status === 'sholat').length;
+  const totalTidak = attendance.filter(a => a.status === 'tidak').length;
+  const percentageSholat = totalRecords > 0 ? ((totalSholat / totalRecords) * 100).toFixed(1) : '0';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
@@ -158,6 +164,49 @@ export default function WaliKelasPage() {
           <button onClick={handlePrint} className="btn btn-indigo">
             <Printer size={16} /> Cetak Laporan (Print/PDF)
           </button>
+        </div>
+      </div>
+
+      {/* Stats Summary Widgets */}
+      <div className="no-print" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
+        <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
+          <div style={{ padding: '12px', background: 'var(--accent-indigo-bg)', borderRadius: '12px', color: 'var(--accent-indigo)' }}>
+            <FileSpreadsheet size={24} />
+          </div>
+          <div>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Total Presensi Input</p>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>{totalRecords}</h2>
+          </div>
+        </div>
+
+        <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
+          <div style={{ padding: '12px', background: 'var(--accent-emerald-bg)', borderRadius: '12px', color: 'var(--accent-emerald)' }}>
+            <CheckCircle size={24} />
+          </div>
+          <div>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Siswa Sholat</p>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-emerald)' }}>{totalSholat}</h2>
+          </div>
+        </div>
+
+        <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
+          <div style={{ padding: '12px', background: 'var(--accent-rose-bg)', borderRadius: '12px', color: 'var(--accent-rose)' }}>
+            <XCircle size={24} />
+          </div>
+          <div>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Tidak Sholat</p>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-rose)' }}>{totalTidak}</h2>
+          </div>
+        </div>
+
+        <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
+          <div style={{ padding: '12px', background: 'var(--accent-amber-bg)', borderRadius: '12px', color: 'var(--accent-amber)' }}>
+            <PieChart size={24} />
+          </div>
+          <div>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Tingkat Kehadiran</p>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-amber)' }}>{percentageSholat}%</h2>
+          </div>
         </div>
       </div>
 
