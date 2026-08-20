@@ -21,6 +21,13 @@ export async function middleware(req: NextRequest) {
       const { payload } = await jwtVerify(token, JWT_SECRET);
       const role = payload.role as string;
 
+      // Force logout and redirect to login if role is ketua_kelas
+      if (role === 'ketua_kelas') {
+        const response = NextResponse.redirect(new URL('/', req.url));
+        response.cookies.delete('auth_token');
+        return response;
+      }
+
       // 1. Wali Kelas route protection
       if (pathname.startsWith('/dashboard/wali-kelas') && !['admin', 'wali_kelas'].includes(role)) {
         return NextResponse.redirect(new URL('/dashboard/koordinator', req.url));
