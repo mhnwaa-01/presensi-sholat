@@ -32,6 +32,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Username atau password salah' }, { status: 401 });
     }
 
+    // Block ketua_kelas from accessing web dashboard
+    if (user.role === 'ketua_kelas') {
+      return NextResponse.json({ error: 'Akun ini adalah Ketua Kelas. Silakan gunakan Aplikasi Mobile APK.' }, { status: 403 });
+    }
+
     // Issue JWT token
     const token = await signToken({
       id: user.id,
