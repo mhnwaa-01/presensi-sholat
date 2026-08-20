@@ -109,7 +109,7 @@ export default function LoginPage() {
             Presensi Sholat Siswa
           </h1>
           <p style={{ fontSize: '0.875rem', color: '#94a3b8', lineHeight: '1.4' }}>
-            Web Dashboard Manajemen & Rekapitulasi
+            Manajemen & Rekapitulasi Sholat Siswa
           </p>
         </div>
 
@@ -215,7 +215,7 @@ export default function LoginPage() {
           color: '#94a3b8',
         }}>
           <Sparkles size={14} color="#f59e0b" />
-          <span>Akses Role: Admin, Koordinator & Wali Kelas</span>
+          <span>Dev : Muh Hidayat</span>
         </div>
       </div>
     </div>
