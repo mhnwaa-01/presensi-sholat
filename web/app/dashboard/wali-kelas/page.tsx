@@ -266,13 +266,13 @@ export default function WaliKelasPage() {
           <table className="custom-table">
             <thead>
               <tr>
-                <th style={{ width: '60px' }}>No</th>
-                <th style={{ width: '120px' }}>NIS</th>
-                <th>Nama Siswa</th>
-                <th style={{ width: '120px', textAlign: 'center' }}>Tanggal</th>
-                <th style={{ textAlign: 'center' }}>Sholat Dhuha</th>
-                <th style={{ textAlign: 'center' }}>Sholat Dhuhur</th>
-                <th style={{ textAlign: 'center' }}>Sholat Ashar</th>
+                <th style={{ width: '60px', whiteSpace: 'nowrap' }}>No</th>
+                <th style={{ width: '140px', whiteSpace: 'nowrap' }}>NIS</th>
+                <th style={{ whiteSpace: 'nowrap' }}>Nama Siswa</th>
+                <th style={{ width: '120px', textAlign: 'center', whiteSpace: 'nowrap' }}>Tanggal</th>
+                <th style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>Sholat Dhuha</th>
+                <th style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>Sholat Dhuhur</th>
+                <th style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>Sholat Ashar</th>
               </tr>
             </thead>
             <tbody>
@@ -302,9 +302,9 @@ export default function WaliKelasPage() {
 
                       return (
                         <tr key={`${student.id}-${date}`}>
-                          <td style={{ textAlign: 'center', color: '#64748b' }}>{globalIdx}</td>
-                          <td style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>{student.nis}</td>
-                          <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{student.name}</td>
+                          <td style={{ textAlign: 'center', color: '#64748b', whiteSpace: 'nowrap' }}>{globalIdx}</td>
+                          <td style={{ fontWeight: 600, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>{student.nis}</td>
+                          <td style={{ fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>{student.name}</td>
                           <td style={{ textAlign: 'center', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
                             {new Date(date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
                           </td>
@@ -312,9 +312,11 @@ export default function WaliKelasPage() {
                           {/* Dhuha */}
                           <td style={{ textAlign: 'center' }}>
                             {dhuha ? (
-                              <span className={`badge ${dhuha.status === 'sholat' ? 'badge-sholat' : 'badge-tidak'}`}>
-                                {dhuha.status === 'sholat' ? 'Sholat' : 'Tidak'}
-                              </span>
+                              dhuha.status === 'sholat' ? (
+                                <CheckCircle size={18} style={{ color: '#10b981', display: 'inline-block' }} />
+                              ) : (
+                                <XCircle size={18} style={{ color: '#ef4444', display: 'inline-block' }} />
+                              )
                             ) : (
                               <span style={{ fontSize: '0.8rem', color: '#64748b' }}>-</span>
                             )}
@@ -323,9 +325,11 @@ export default function WaliKelasPage() {
                           {/* Dhuhur */}
                           <td style={{ textAlign: 'center' }}>
                             {dhuhur ? (
-                              <span className={`badge ${dhuhur.status === 'sholat' ? 'badge-sholat' : 'badge-tidak'}`}>
-                                {dhuhur.status === 'sholat' ? 'Sholat' : 'Tidak'}
-                              </span>
+                              dhuhur.status === 'sholat' ? (
+                                <CheckCircle size={18} style={{ color: '#10b981', display: 'inline-block' }} />
+                              ) : (
+                                <XCircle size={18} style={{ color: '#ef4444', display: 'inline-block' }} />
+                              )
                             ) : (
                               <span style={{ fontSize: '0.8rem', color: '#64748b' }}>-</span>
                             )}
@@ -334,9 +338,11 @@ export default function WaliKelasPage() {
                           {/* Ashar */}
                           <td style={{ textAlign: 'center' }}>
                             {ashar ? (
-                              <span className={`badge ${ashar.status === 'sholat' ? 'badge-sholat' : 'badge-tidak'}`}>
-                                {ashar.status === 'sholat' ? 'Sholat' : 'Tidak'}
-                              </span>
+                              ashar.status === 'sholat' ? (
+                                <CheckCircle size={18} style={{ color: '#10b981', display: 'inline-block' }} />
+                              ) : (
+                                <XCircle size={18} style={{ color: '#ef4444', display: 'inline-block' }} />
+                              )
                             ) : (
                               <span style={{ fontSize: '0.8rem', color: '#64748b' }}>-</span>
                             )}
