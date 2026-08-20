@@ -169,7 +169,7 @@ export default function KoordinatorPage() {
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
         <div>
           <h1 style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
-            Rekapitulasi Global Presensi Sholat
+            Rekapitulasi Presensi Sholat Siswa
           </h1>
           <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
             Panel Koordinator Keagamaan untuk memantau presensi seluruh kelas secara real-time.
@@ -305,7 +305,7 @@ export default function KoordinatorPage() {
         {/* Printable Header Details */}
         <div style={{ marginBottom: '20px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
           <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-            LAPORAN REKAPITULASI PRESENSI SHOLAT GLOBAL
+            LAPORAN REKAPITULASI PRESENSI SHOLAT SISWA
           </h3>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
             Periode: {new Date(startDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })} s.d. {new Date(endDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })} | Kelas: {selectedClass === 'all' ? 'Semua Kelas' : classes.find(c => c.id === selectedClass)?.name || '-'}
