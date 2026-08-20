@@ -71,6 +71,9 @@ export default function AdminDashboard() {
   const [classEditError, setClassEditError] = useState('');
   const [classEditSuccess, setClassEditSuccess] = useState('');
 
+  // Delete class confirmation state
+  const [confirmDeleteClass, setConfirmDeleteClass] = useState<any>(null);
+
   // View students class states
   const [viewStudentsClass, setViewStudentsClass] = useState<any>(null);
   const [studentSearchQuery, setStudentSearchQuery] = useState('');
@@ -329,7 +332,26 @@ export default function AdminDashboard() {
     }
   };
 
-  // Trigger Delete Confirmation Modal
+  // Trigger Delete Confirmation Modal for Class
+  const handleDeleteClassClick = (c: any) => {
+    setConfirmDeleteClass(c);
+  };
+
+  // Execute Class Deletion
+  const executeDeleteClass = async (id: string) => {
+    try {
+      const res = await fetch(`/api/classes?id=${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Gagal menghapus kelas');
+
+      showNotification('success', 'Kelas Berhasil Dihapus', 'Kelas dan seluruh data siswa terikat telah dihapus.');
+      fetchData();
+    } catch (err: any) {
+      showNotification('error', 'Gagal Menghapus Kelas', err.message);
+    }
+  };
+
+  // Trigger Delete Confirmation Modal for User
   const handleDeleteUserClick = (user: any) => {
     setConfirmDeleteUser(user);
   };
@@ -727,6 +749,13 @@ export default function AdminDashboard() {
                           style={{ padding: '6px 10px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                         >
                           <UploadCloud size={14} /> Import Siswa
+                        </button>
+                        <button
+                          onClick={() => handleDeleteClassClick(c)}
+                          className="btn btn-danger"
+                          style={{ padding: '6px 10px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                        >
+                          <Trash2 size={14} /> Hapus
                         </button>
                       </div>
                     </td>
@@ -1389,7 +1418,7 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
+      {/* Delete Confirmation Modal for User */}
       {confirmDeleteUser && (
         <div style={{
           position: 'fixed',
@@ -1460,6 +1489,83 @@ export default function AdminDashboard() {
                 style={{ flex: 1 }}
               >
                 Hapus Akun
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal for Class */}
+      {confirmDeleteClass && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(15, 23, 42, 0.6)',
+          backdropFilter: 'blur(4px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999,
+          padding: '16px'
+        }}>
+          <div className="glass-card" style={{
+            background: '#fff',
+            border: '1px solid var(--border-color)',
+            borderRadius: '16px',
+            width: '100%',
+            maxWidth: '400px',
+            boxShadow: 'var(--shadow)',
+            padding: '28px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+            textAlign: 'center',
+            position: 'relative'
+          }}>
+            <div style={{
+              margin: '0 auto',
+              padding: '16px',
+              background: 'rgba(239, 68, 68, 0.1)',
+              color: '#ef4444',
+              borderRadius: '50%',
+              width: '64px',
+              height: '64px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <Trash2 size={32} />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)' }}>Hapus Kelas</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                Apakah Anda yakin ingin menghapus kelas <strong>{confirmDeleteClass.name}</strong>? Seluruh data siswa dan riwayat presensi yang terikat pada kelas ini akan **terhapus secara permanen**.
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
+              <button 
+                type="button" 
+                className="btn btn-outline" 
+                onClick={() => setConfirmDeleteClass(null)} 
+                style={{ flex: 1 }}
+              >
+                Batal
+              </button>
+              <button 
+                type="button" 
+                className="btn btn-danger" 
+                onClick={() => {
+                  executeDeleteClass(confirmDeleteClass.id);
+                  setConfirmDeleteClass(null);
+                }} 
+                style={{ flex: 1 }}
+              >
+                Hapus Kelas
               </button>
             </div>
           </div>
