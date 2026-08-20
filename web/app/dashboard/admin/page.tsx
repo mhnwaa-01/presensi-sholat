@@ -74,6 +74,9 @@ export default function AdminDashboard() {
   // Delete class confirmation state
   const [confirmDeleteClass, setConfirmDeleteClass] = useState<any>(null);
 
+  // Current logged in user state
+  const [currentUser, setCurrentUser] = useState<any>(null);
+
   // View students class states
   const [viewStudentsClass, setViewStudentsClass] = useState<any>(null);
   const [studentSearchQuery, setStudentSearchQuery] = useState('');
@@ -115,6 +118,13 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetchData();
+    fetch('/api/auth/me')
+      .then(res => res.json())
+      .then(data => {
+        if (data.authenticated) {
+          setCurrentUser(data.user);
+        }
+      });
   }, []);
 
   // Download template for a single class
@@ -610,13 +620,32 @@ export default function AdminDashboard() {
                         >
                           <Edit size={14} /> Edit
                         </button>
-                        <button
-                          onClick={() => handleDeleteUserClick(u)}
-                          className="btn btn-danger"
-                          style={{ padding: '4px 8px', fontSize: '0.75rem' }}
-                        >
-                          <Trash2 size={14} /> Hapus
-                        </button>
+                        {currentUser?.id === u.id ? (
+                          <button
+                            disabled
+                            className="btn"
+                            style={{
+                              padding: '4px 8px',
+                              fontSize: '0.75rem',
+                              opacity: 0.5,
+                              cursor: 'not-allowed',
+                              background: '#f1f5f9',
+                              color: '#94a3b8',
+                              border: '1px solid #cbd5e1'
+                            }}
+                            title="Anda tidak dapat menghapus akun Anda sendiri"
+                          >
+                            <Trash2 size={14} /> Hapus
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleDeleteUserClick(u)}
+                            className="btn btn-danger"
+                            style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                          >
+                            <Trash2 size={14} /> Hapus
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>
