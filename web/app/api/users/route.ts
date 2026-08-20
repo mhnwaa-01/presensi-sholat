@@ -99,6 +99,11 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: 'ID user wajib diberikan' }, { status: 400 });
   }
 
+  // Prevent self-deletion
+  if (id === session.id) {
+    return NextResponse.json({ error: 'Anda tidak dapat menghapus akun Anda sendiri.' }, { status: 400 });
+  }
+
   const { error } = await supabaseAdmin.from('users').delete().eq('id', id);
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
